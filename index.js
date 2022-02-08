@@ -33,7 +33,7 @@ mongoose.connect(db.mongoURI).then(()=>{
         secret:"nodeJSteste",
         resave: true,
         saveUninitialized: true,
-        store: MongoStore.create(options)
+        store: MongoStore.create({mongoUrl: db.mongoURI})
     }))
     app.use(passport.initialize());
     app.use(passport.session())
