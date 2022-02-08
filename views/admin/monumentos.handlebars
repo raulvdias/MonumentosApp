@@ -1,0 +1,22 @@
+<h2>Lista de monumentos:</h2>
+
+<a href="/admin/monumentos/add"><button class="btn btn-success">Novo monumento</button></a>
+<hr>
+{{#each monumentos}}
+<div class="card">
+    <div class="card-body">
+        <h4>Nome da obra: {{nomeobra}}</h4>
+        <small>Idade: {{idade}}</small><br>
+        <small>Local: {{local}}</small><br>
+        <small>Descrição: {{descricao}}</small><br>
+        <small>Categoria: {{categoria.nome}}</small><br>
+        <a href="/admin/monumentos/edit/{{_id}}"><button class="btn btn-success mt-2" type="submit">Editar</button></a>
+        <form action="/admin/monumentos/delete" method="POST" class="mt-2">
+            <input type="hidden" name="id" value="{{_id}}">
+            <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
+    </div>
+</div>
+{{else}}
+<p>Nenhum monumento registrado!</p>
+{{/each}}
