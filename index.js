@@ -8,6 +8,7 @@ const admin = require('./routes/admin');
 const usuarios = require('./routes/usuario');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash');
 const { allowedNodeEnvironmentFlags } = require('process');
 require('./models/Monumento')
@@ -17,6 +18,7 @@ const Categoria = mongoose.model('categorias');
 const passport = require('passport');
 require('./config/auth')(passport);
 const db = require('./config/db');
+const { options } = require('./routes/admin');
 
 
 mongoose.connect(db.mongoURI).then(()=>{
@@ -30,7 +32,8 @@ mongoose.connect(db.mongoURI).then(()=>{
     app.use(session({
         secret:"nodeJSteste",
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store: new MongoStore(options)
     }))
     app.use(passport.initialize());
     app.use(passport.session())
