@@ -119,7 +119,7 @@ app.use('/usuarios', usuarios);
 
 
 //outros
-const PORT = process.env.PORT || 3000;
-app.listen(process.env.PORT, ()=>{
+const PORT = process.env.PORT;
+app.listen(PORT, ()=>{
     console.log("Servidor rodando!");
 });
