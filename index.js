@@ -8,7 +8,7 @@ const admin = require('./routes/admin');
 const usuarios = require('./routes/usuario');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const {MongoStore} = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const { allowedNodeEnvironmentFlags } = require('process');
 require('./models/Monumento')
@@ -33,7 +33,7 @@ mongoose.connect(db.mongoURI).then(()=>{
         secret:"nodeJSteste",
         resave: true,
         saveUninitialized: true,
-        store: new MongoStore(options)
+        store: MongoStore.create(options)
     }))
     app.use(passport.initialize());
     app.use(passport.session())
